@@ -1,0 +1,55 @@
+﻿@using KUSYS_Demo.ViewModels.User;
+@model UserAddOrUpdateViewModel;
+
+@{
+    ViewData["Title"] = "AddUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Add User</h1>
+
+<form method="post">
+    <div class="form-group">
+        @Html.Label("User Name")
+        @Html.TextBoxFor(x => x.UserName, new{@class = "form-control"})
+        @Html.ValidationMessageFor(x => x.UserName)
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Password")
+        @Html.TextBoxFor(x => x.Password, new{@class = "form-control", @type="password"})
+        @Html.ValidationMessageFor(x => x.Password)
+        <br />
+        <input type="checkbox" onclick="showpassword()"> Show Password
+    </div> 
+    <br />
+    <div class="form-group">
+        @Html.Label("Email")
+        @Html.TextBoxFor(x => x.Email, new{@class = "form-control", @type="email"})
+        @Html.ValidationMessageFor(x => x.Email)
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Student")
+        @Html.DropDownListFor(x => x.Students.Keys,new SelectList(Model.Students,"Key","Value", selectedValue:Model.SelectedUser),new{@class = "form-control"})
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Role")
+        @Html.DropDownListFor(x => x.Role.Keys,new SelectList(Model.Role,"Key","Value", Model.SelectedRole),new{@class = "form-control"})
+    </div>
+    <br />
+    <button class="btn btn-outline-success">Save</button>
+</form>
+
+
+ <script>
+    function showpassword() {
+        var x = document.getElementById("Password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>

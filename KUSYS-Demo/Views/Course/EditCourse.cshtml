@@ -1,0 +1,23 @@
+﻿@using KUSYS_Demo.ViewModels.Course;
+@model CourseAddOrEditViewModel;
+@{
+    ViewData["Title"] = "EditCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit Course</h1>
+
+<form method="post">
+    <div class="form-group">
+        @Html.Label("Course Id")
+        @Html.TextBoxFor(x => x.CourseId, new{@class = "form-control", @readonly = "readonly" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Course Name")
+        @Html.TextBoxFor(x => x.CourseName, new{@class = "form-control"})
+        @Html.ValidationMessageFor(x => x.CourseName)
+    </div>
+    <br />
+    <button class="btn btn-outline-success">Save</button>
+</form>

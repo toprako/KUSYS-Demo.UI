@@ -1,0 +1,32 @@
+﻿@using KUSYS_Demo.ViewModels.Course;
+@model List<CourseAllViewModel>;
+@{
+    ViewData["Title"] = "Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int counter = 0;
+}
+
+<h1>Courses</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Course Id</th>
+        <th>Course Name</th>      
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        counter++;
+        <tr>
+            <td>@counter</td>
+            <td>@item.CourseId</td>
+            <td>@item.CourseName</td>
+            <td><a href="/Course/DeleteCourse/@item.CourseId" class="btn btn-outline-danger">Delete</a></td>
+            <td><a href="/Course/EditCourse/@item.CourseId" class="btn btn-outline-success">Update</a></td>
+        </tr>
+    }
+</table>
+
+<a href="/Course/AddCourse" class="btn btn-outline-info">New Course Registration</a>

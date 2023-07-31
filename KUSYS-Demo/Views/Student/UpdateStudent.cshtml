@@ -1,0 +1,47 @@
+﻿@using KUSYS_Demo.ViewModels.Home;
+@model StudentViewModel;
+
+@{
+    ViewData["Title"] = "UpdateStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Update Student Information</h1>
+
+<form method="post">
+    <div class="form-group">
+        @Html.Label("First Name")
+        @Html.TextBoxFor(x => x.FirstName, new{@class = "form-control"})
+        @Html.ValidationMessageFor(x => x.FirstName)
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Last Name")
+        @Html.TextBoxFor(x => x.LastName, new{@class = "form-control"})
+        @Html.ValidationMessageFor(x => x.LastName)
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Birth Date")
+        @Html.TextBoxFor(x => x.BirthDate ,string.Format("{0:dd-MM-yyyy}", Model.BirthDate),new{ @class = "form-control"})
+        @Html.ValidationMessageFor(x => x.BirthDate)
+    </div>
+    <br />
+    @* <div class="list-group">
+    @Html.ListBoxFor(x => x.SelectedCourseId, Model.Courses, new { @style= "width:500px" ,@class="list-group-item",@multiple="multiple"})
+    </div>*@
+    <div id="list" tabindex="100">
+        <ul class="list-group">
+            @for (int i = 0; i < Model.Courses.Count; i++)
+            {
+                <li class="list-group-item">
+                    @Html.CheckBoxFor(x => x.Courses[i].Checked,new{@class = "form-check-input me-1"}) @Model.Courses[i].Text
+                    @Html.HiddenFor(x =>  x.Courses[i].Text)
+                    @Html.HiddenFor(x =>  x.Courses[i].Value)
+                </li>
+            }
+        </ul>
+    </div>
+    <br />
+    <button class="btn btn-outline-success">Save</button>
+</form>
